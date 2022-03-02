@@ -1,0 +1,30 @@
+#!C:\Users\hp\AppData\Local\Programs\Python\Python38-32\python.exe
+import pymysql as ms
+import cgi
+print("Content-Type:text/html")
+print("")
+con=ms.connect("localhost","root","","kvk_hospitals")
+print("<html><style> body{ background-image:url('https://scx2.b-cdn.net/gfx/news/hires/2015/whenusedeffe.jpg');background-repeat:no-repeat;background-size:100%;</style>")
+print("<body> <h1 style='text-align:center'> KVK HOSPITALS     Patients Discharged<br><br><br><br>")
+print("<table border='0' width='100%'><tr><td><a href='d4.py'>Doctor Details</a></td><td><a href='n1.py'>Nurse Details</a></td><td><a href='other_workers.py'>Workers Details</a></td><td><a href='patient.py'>Patient Details</a></td><td><a href='dpatients.py'>Discharge Patient Details</a></td><td><a href='ADMIN.py'>Logout</a></td></tr></table><hr>")
+print("<form method='post'>")
+print("<table align='center'>")
+
+c=con.cursor()
+c.execute("Select * from patient_details where discharge_date<>''")
+rows=c.fetchall()
+print("<table border='1' align='center'>")
+print("<tr><td>Patient ID</td><td>Name</td><td>Gender</td><td>Age</td><td>Address</td><td>Mobile</td><td>Doctor</td><td>Discharge Date</td></tr>")
+for i in range(len(rows)):
+    print("<tr>")
+    print("<td>{0}</td>".format(rows[i][0]))
+    print("<td>{0}</td>".format(rows[i][1]))
+    print("<td>{0}</td>".format(rows[i][2]))
+    print("<td>{0}</td>".format(rows[i][3]))
+    print("<td>{0}</td>".format(rows[i][4]))
+    print("<td>{0}</td>".format(rows[i][5]))
+    print("<td>{0}</td>".format(rows[i][6]))
+    print("<td>{0}</td>".format(rows[i][7]))
+    print("</tr>")
+print("</table>")
+print("</body></html>")
